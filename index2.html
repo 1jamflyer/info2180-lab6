@@ -1,9 +1,6 @@
 <html>
 <head>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js" type="text/javascript"></script>
-    <script src="C:/Users/Jonno/Documents/definition.js" type="text/javascript"></script>
-</head>
-<script>
+    <script>
     function loadDef() {
     var xhttp = new XMLHttpRequest();
     var term = $("#term").val()
@@ -18,17 +15,21 @@
     xhttp.send(); 
 }
 </script>
+</head>
 
+<body>
 <h1>Web Dictionary</h1>
 
 <p>Type a word to search below</p>
 
-<input type="text" name="search" id=term placeholder="Search.."> <button id= Search> Search </button>
+<input type="text" name="search" id=term  placeholder="Search.."> <button id= Search onclick="loadDef()"> Search </button> 
+<button id=GetAll>Get All Definitions</button>
+
 
 <h3>Definitions:</h3>
-<div id=definition>
+<div id=result>
     
 </div>
 
-
+</body>
 </html>
