@@ -13,17 +13,49 @@
     };
     xhttp.open("GET", "request.php?q="+term, true);
     xhttp.send(); 
+    
+    function xmlFunction(event){
+        var url= "request.php?q=";
+        event.preventDefault();
+
+        $.ajax({
+            url: "request.php?q=&all=true",
+            method: "GET",
+            dataType:"xml"
+        })
+        if(this.readyState==4 && this.status==200){
+            var term = responseText.find("definition");
+            var ol = document.createElement("ol");
+            document.getElementById("result").html("");
+            ("#result").append("<ol></ol>");
+            (term).each(function(index, value)
+            {
+                console.log($(value).attr("name"));
+                console.log($(value).html());
+                ('#result ol')
+                .append("<li><h3>" + $(value).attr("name") + "</h3>"+
+                "<p>" + $(value).html() + "</p>" +
+                "<p>" + "- " + $(value).attr("author") + "</p></li>");
+                
+            });
+        }else{
+            alert("XML Error");
+        }
+    }
+    
 }
 </script>
 </head>
 
 <body>
-<h1>Web Dictionary</h1>
+<h1 style= "background-color:#008CBA;">Web Dictionary</h1>
 
 <p>Type a word to search below</p>
 
-<input type="text" name="search" id=term  placeholder="Search.."> <button id= Search onclick="loadDef()"> Search </button> 
-<button id=GetAll>Get All Definitions</button>
+<input type="text" name="search" id=term  placeholder="Search..">
+<button id= Search onclick="loadDef()" style= "background-color: #008CBA; border-radius: 4px;"> Search </button> 
+
+<button id=GetAll onclick="xmlFunction" style= "background-color: #008CBA; border-radius:4px;">Get All Definitions</button>
 
 
 <h3>Definitions:</h3>
@@ -33,3 +65,4 @@
 
 </body>
 </html>
+
